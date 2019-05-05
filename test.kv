@@ -1,0 +1,435 @@
+<Gerenciador>:
+    Menu:
+        name: 'menu'
+    Distancia:
+        name: 'distancia'
+    Angulo:
+        name: 'angulo'
+    Lancamento:
+        name: 'lancamento'
+    Azimute:
+        name: 'azimute'
+    
+<Menu>:
+    canvas:
+        Color:
+            rgb: (0,0,0)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        orientation:'vertical'
+        padding:100
+        spacing:20
+        Image:
+            source:'art3.png'
+            size_hint_y:None
+            height:200
+            allow_stretch:True
+        Button:
+            text:'Distância'
+            on_release:root.btn()
+            color: .8,.9,0,1
+
+                
+        Button:
+            text:'Ângulo QM'
+            on_release:root.btn2()
+            color: .8,.9,0,1
+
+        Button:
+            text:'Lançamento'
+            on_release:root.btn3()
+            color: .8,.9,0,1
+
+            
+        Button:
+            text:'Azimute'
+            on_release:root.btn4()
+            color: .8,.9,0,1
+            
+
+        Button:
+            text:'Sair'
+            on_release:app.stop()
+            background_color:   
+            color: .8,.9,0,1
+                        
+        Label:
+            text:'Desenvolvido pelo 1º Ten Davis \n      rodrigofdavis@gmail.com'
+            color: [1,1,1,1]
+
+<P>:
+    Label:
+        text:'       Usar coordenadas UTM  \n  (clique fora da tela para fechar)'
+        size_hint: 0.6, 0.2
+        pos_hint: {'x':0.2, 'top':1}
+
+    Button:
+        text:'Ok'
+        size_hint: 0.8, 0.2
+        pos_hint: {'x':0.1, 'y':0.1}
+        on_release:app.root.current = 'distancia'
+
+<Q>:
+    Label:
+        text:'       Usar coordenadas UTM  \n  (clique fora da tela para fechar)'
+        size_hint: 0.6, 0.2
+        pos_hint: {'x':0.2, 'top':1}
+
+    Button:
+        text:'Ok'
+        size_hint: 0.8, 0.2
+        pos_hint: {'x':0.1, 'y':0.1}
+        on_release:app.root.current = 'angulo'
+    
+<R>:
+    Label:
+        text:'       Usar coordenadas UTM  \n  (clique fora da tela para fechar)'
+        size_hint: 0.6, 0.2
+        pos_hint: {'x':0.2, 'top':1}
+
+    Button:
+        text:'Ok'
+        size_hint: 0.8, 0.2
+        pos_hint: {'x':0.1, 'y':0.1}
+        on_release:app.root.current = 'lancamento'
+
+<S>:
+    Label:
+        text:'       Usar coordenadas UTM  \n  (clique fora da tela para fechar)'
+        size_hint: 0.6, 0.2
+        pos_hint: {'x':0.2, 'top':1}
+
+    Button:
+        text:'Ok'
+        size_hint: 0.8, 0.2
+        pos_hint: {'x':0.1, 'y':0.1}
+        on_release:app.root.current = 'azimute'
+
+
+
+<Distancia>:
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Digite as coordenas E e N da Estação:'
+        BoxLayout:
+            Label:
+                text:'Ea:'
+            TextInput:
+                id:input1
+                text:''
+            Label:
+                text:'Na:'
+            TextInput:
+                id:input2
+                text:''
+        Label:
+            text: 'Digite as coordenas E e N do Ponto Visado:'
+        BoxLayout:
+            Label:
+                text:'Eb:'
+            TextInput:
+                id:input3
+                text:''
+            Label:
+                text:'Nb:'
+            TextInput:
+                id:input4
+                text:''
+        Button:
+            text:'Calcular:'
+            on_release:root.calcular_distancia()
+        TextInput:
+            id: apertado
+            text:''
+            
+<Angulo>
+    id: top
+    a_carta: input0 
+    a_atual: input1 
+    dmg: input2 
+    dmm: input3
+    dms: input4 
+    dmag: input5 
+    dmam: input6
+    dmas: input7 
+    conv_g: input8 
+    conv_m: input9 
+    conv_s: input10 
+    resultado: apertado 
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text:'Digite o ano da confecção da carta topográfica:'
+        TextInput:
+            id: input0
+            text:''
+        Label:
+            text:'Digite o ano corrente:'
+        TextInput:
+            id: input1
+            text:''
+        Label:
+            text:'Digite abaixo a varição da Declinação magnética da carta ao ano em Graus, min e seg:'
+        BoxLayout:
+            Button:
+                text:'+'
+                on_press:top.t2_bold = False
+            Button:
+                text:'-'
+                on_press:top.t2_bold = True
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input2
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input3
+                text:''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input4
+                text:''
+        Label:
+            text:'Digite abaixo a Declinação Magnética da carta:'
+        BoxLayout:
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input5
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input6
+                text: ''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input7
+                text: ''
+        Label:
+            text:'Digite abaixo a convergência de meridianos da carta:'
+        BoxLayout:
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input8
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input9
+                text: ''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input10
+                text: ''
+        Label:
+            text: 'O Norte de Quadrícula e o Norte Magnético estão em lados opostos a direção do NV:'
+        BoxLayout:
+            Button:
+                text:'sim'
+                on_press:top.t_bold = False
+            Button:
+                text:'não'
+                on_press:top.t_bold = True   
+        Button:
+            text:'Calcular:'
+            on_press:top.calc_qm_sim()
+            on_press:top.calc_qm_nao()
+        TextInput:
+            id: apertado
+            text:''
+    
+<Lancamento>
+    ea: ea
+    na: na
+    eb: eb
+    nb: nb
+    
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Digite as coordenas E e N da estação:'
+        BoxLayout:
+            Label:
+                text:'Ea:'
+            TextInput:
+                id:ea
+                text:''
+            Label:
+                text:'Na:'
+            TextInput:
+                id:na
+                text:''
+        Label:
+            text: 'Digite as coordenas E e N do Ponto Visado:'
+        BoxLayout:
+            Label:
+                text:'Eb:'
+            TextInput:
+                id:eb
+                text:''
+            Label:
+                text:'Nb:'
+            TextInput:
+                id:nb
+                text:''
+        Button:
+            text:'Calcular:'
+            on_press: root.calc_ang()
+        TextInput:
+            id:apertado
+            text:''
+<Azimute>
+    id: top
+    ea: ea
+    na: na
+    eb: eb
+    nb: nb
+    a_carta: input0 
+    a_atual: input1 
+    dmg: input2 
+    dmm: input3
+    dms: input4 
+    dmag: input5 
+    dmam: input6
+    dmas: input7 
+    conv_g: input8 
+    conv_m: input9 
+    conv_s: input10 
+    resultado: apertado
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            Label:
+                text:'(E) EO:'
+            TextInput:
+                id: ea
+                text:''
+            Label:
+                text:'(N) EO:'
+            TextInput:
+                id: na
+                text:''
+            Label:
+                text:'(E) PV:'
+            TextInput:
+                id: eb
+                text:''
+            Label:
+                text:'(N) PV:'
+            TextInput:
+                id: nb
+                text:''
+        Label:
+            text:'Digite o ano da confecção da carta topográfica:'
+        TextInput:
+            id: input0
+            text:''
+        Label:
+            text:'Digite o ano corrente:'
+        TextInput:
+            id: input1
+            text:''
+        Label:
+            text:'Digite abaixo a variação da Declinação magnética da carta ao ano em Graus, min e seg:'
+        BoxLayout:
+            Button:
+                text:'+'
+                on_press:top.t3_bold = False
+            Button:
+                text:'-'
+                on_press:top.t3_bold = True
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input2
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input3
+                text:''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input4
+                text:''
+        Label:
+            text:'Digite abaixo a Declinação Magnética da carta:'
+        BoxLayout:
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input5
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input6
+                text: ''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input7
+                text: ''
+        Label:
+            text:'Digite abaixo a convergência de meridianos da carta:'
+        BoxLayout:
+            Label:
+                text:'Graus ( º ):'
+            TextInput:
+                id: input8
+                text:''
+            Label:
+                text:'Minutos ( \' ):'
+            TextInput:
+                id: input9
+                text: ''
+            Label:
+                text:'Segundos ( \" ):'
+            TextInput:
+                id: input10
+                text: ''
+        Label:
+            text: 'O Norte de Quadrícula e o Norte Magnético estão em lados opostos a direção do NV:'
+        BoxLayout:
+            Button:
+                text:'sim'
+                on_press:top.t_bold = False
+            Button:
+                text:'nao'
+                on_press:top.t_bold = True
+        Label:
+            text: 'O Norte Magnético esta a leste do Norte de Quadrícula?'
+        BoxLayout:
+            Button:
+                text:'sim'
+                on_press:top.t2_bold = False
+            Button:
+                text:'nao'
+                on_press:top.t2_bold = True
+        Button:
+            text:'Calcular:'
+            on_press:top.calc_qm()
+            on_press:top.calc_az_sim()
+            on_press:top.calc_az_nao()
+            
+        
+        TextInput:
+            id: apertado
+            text:''
+        
+                
+
+
+                            
+
